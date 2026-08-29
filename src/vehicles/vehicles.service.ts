@@ -11,7 +11,7 @@ export class VehiclesService {
   constructor(
     @InjectRepository(VehicleEntity)
     private readonly vehicleRepository: Repository<VehicleEntity>,
-  ) {}
+  ) { }
 
   async findAll(): Promise<VehicleEntity[]> {
     return this.vehicleRepository.find();
@@ -23,6 +23,22 @@ export class VehiclesService {
         id,
       },
     });
+  }
+
+  async search(search: string): Promise<VehicleEntity[]> {
+    return this.vehicleRepository
+      .createQueryBuilder('vehicle')
+      .where('vehicle.active = :active', { active: true })
+      .andWhere(
+        `(
+        vehicle.licensePlate LIKE :search
+        OR vehicle.brand LIKE :search
+        OR vehicle.model LIKE :search
+        OR vehicle.color LIKE :search
+      )`,
+        { search: `%${search}%` },
+      )
+      .getMany();
   }
 
   async create(
@@ -51,6 +67,22 @@ export class VehiclesService {
     }
 
     Object.assign(vehicle, updateVehicleDto);
+
+    return this.vehicleRepository.save(vehicle);
+  }
+
+  async remove(id: number): Promise<VehicleEntity | null> {
+    const vehicle = await this.vehicleRepository.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!vehicle) {
+      return null;
+    }
+
+    vehicle.active = false;
 
     return this.vehicleRepository.save(vehicle);
   }

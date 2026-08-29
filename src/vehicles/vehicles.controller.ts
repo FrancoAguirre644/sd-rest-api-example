@@ -1,10 +1,12 @@
 import {
     Body,
     Controller,
+    Delete,
     Get,
     Param,
     Patch,
     Post,
+    Query,
 } from '@nestjs/common';
 
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
@@ -20,6 +22,11 @@ export class VehiclesController {
     @Get()
     findAll() {
         return this.vehiclesService.findAll();
+    }
+
+    @Get('search')
+    search(@Query('search') search: string) {
+        return this.vehiclesService.search(search);
     }
 
     @Get(':id')
@@ -38,5 +45,10 @@ export class VehiclesController {
             Number(id),
             updateVehicleDto,
         );
+    }
+
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return this.vehiclesService.remove(Number(id));
     }
 }
