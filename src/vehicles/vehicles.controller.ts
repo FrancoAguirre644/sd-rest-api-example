@@ -11,6 +11,8 @@ import {
 } from '@nestjs/common';
 
 import {
+  ApiBadRequestResponse,
+  ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
   ApiParam,
@@ -76,6 +78,12 @@ export class VehiclesController {
     description: 'Vehicle retrieved successfully',
     type: VehicleEntity,
   })
+  @ApiBadRequestResponse({
+    description: 'Invalid vehicle ID',
+  })
+  @ApiNotFoundResponse({
+    description: 'Vehicle not found',
+  })
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.vehiclesService.findOne(id);
@@ -107,6 +115,12 @@ export class VehiclesController {
     description: 'Vehicle updated successfully',
     type: VehicleEntity,
   })
+  @ApiBadRequestResponse({
+    description: 'Invalid vehicle ID',
+  })
+  @ApiNotFoundResponse({
+    description: 'Vehicle not found',
+  })
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -130,6 +144,12 @@ export class VehiclesController {
   @ApiOkResponse({
     description: 'Vehicle deactivated successfully',
     type: VehicleEntity,
+  })
+  @ApiBadRequestResponse({
+    description: 'Invalid vehicle ID',
+  })
+  @ApiNotFoundResponse({
+    description: 'Vehicle not found',
   })
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
