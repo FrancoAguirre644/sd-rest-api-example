@@ -10,7 +10,11 @@ export class VehiclesService {
   constructor(
     @InjectRepository(VehicleEntity)
     private readonly vehicleRepository: Repository<VehicleEntity>,
-  ) {}
+  ) { }
+
+  async findAll(): Promise<VehicleEntity[]> {
+    return this.vehicleRepository.find();
+  }
 
   async create(
     createVehicleDto: CreateVehicleDto,

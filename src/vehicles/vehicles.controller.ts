@@ -1,16 +1,26 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get,
+    Post,
+} from '@nestjs/common';
 
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { VehiclesService } from './vehicles.service';
 
 @Controller('vehicles')
 export class VehiclesController {
-  constructor(
-    private readonly vehiclesService: VehiclesService,
-  ) {}
+    constructor(
+        private readonly vehiclesService: VehiclesService,
+    ) { }
 
-  @Post()
-  create(@Body() createVehicleDto: CreateVehicleDto) {
-    return this.vehiclesService.create(createVehicleDto);
-  }
+    @Get()
+    findAll() {
+        return this.vehiclesService.findAll();
+    }
+
+    @Post()
+    create(@Body() createVehicleDto: CreateVehicleDto) {
+        return this.vehiclesService.create(createVehicleDto);
+    }
 }

@@ -12,4 +12,4 @@ import { VehiclesController } from './vehicles.controller';
   providers: [VehiclesService],
   controllers: [VehiclesController],
 })
-export class VehiclesModule {}
+export class VehiclesModule { }
