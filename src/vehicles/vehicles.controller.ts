@@ -4,6 +4,7 @@ import {
     Delete,
     Get,
     Param,
+    ParseIntPipe,
     Patch,
     Post,
     Query,
@@ -30,7 +31,7 @@ export class VehiclesController {
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe) id: number) {
         return this.vehiclesService.findOne(Number(id));
     }
 
@@ -40,7 +41,7 @@ export class VehiclesController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateVehicleDto: UpdateVehicleDto) {
+    update(@Param('id', ParseIntPipe) id: number, @Body() updateVehicleDto: UpdateVehicleDto) {
         return this.vehiclesService.update(
             Number(id),
             updateVehicleDto,
@@ -48,7 +49,7 @@ export class VehiclesController {
     }
 
     @Delete(':id')
-    remove(@Param('id') id: string) {
+    remove(@Param('id', ParseIntPipe) id: number) {
         return this.vehiclesService.remove(Number(id));
     }
 }

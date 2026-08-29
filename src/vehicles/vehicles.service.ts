@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -17,12 +17,18 @@ export class VehiclesService {
     return this.vehicleRepository.find();
   }
 
-  async findOne(id: number): Promise<VehicleEntity | null> {
-    return this.vehicleRepository.findOne({
+  async findOne(id: number): Promise<VehicleEntity> {
+    const vehicle = await this.vehicleRepository.findOne({
       where: {
         id,
       },
     });
+
+    if (!vehicle) {
+      throw new NotFoundException(`Vehicle with ID ${id} not found`);
+    }
+
+    return vehicle;
   }
 
   async search(search: string): Promise<VehicleEntity[]> {
@@ -55,7 +61,7 @@ export class VehiclesService {
   async update(
     id: number,
     updateVehicleDto: UpdateVehicleDto,
-  ): Promise<VehicleEntity | null> {
+  ): Promise<VehicleEntity> {
     const vehicle = await this.vehicleRepository.findOne({
       where: {
         id,
@@ -63,7 +69,7 @@ export class VehiclesService {
     });
 
     if (!vehicle) {
-      return null;
+      throw new NotFoundException(`Vehicle with ID ${id} not found`);
     }
 
     Object.assign(vehicle, updateVehicleDto);
