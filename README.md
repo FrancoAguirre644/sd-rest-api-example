@@ -1,98 +1,546 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Vehicles REST API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API REST desarrollada con **NestJS**, **TypeScript**, **TypeORM** y **MySQL** para la gestión de vehículos.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+El proyecto implementa un CRUD completo de vehículos, búsqueda, eliminación lógica y documentación interactiva mediante Swagger/OpenAPI.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Tecnologías
 
-## Project setup
+* [NestJS](https://nestjs.com/)
+* TypeScript
+* TypeORM
+* MySQL
+* Swagger / OpenAPI
+* Node.js
+* npm
 
-```bash
-$ npm install
+---
+
+## Funcionalidades
+
+La API permite:
+
+* Crear vehículos.
+* Obtener todos los vehículos.
+* Obtener un vehículo por ID.
+* Actualizar vehículos.
+* Desactivar vehículos mediante eliminación lógica.
+* Buscar vehículos.
+* Utilizar un enum para definir el tipo de vehículo.
+* Manejar errores `400` y `404`.
+* Documentar y probar la API mediante Swagger.
+
+---
+
+## Tipos de vehículos
+
+Los vehículos pueden pertenecer a uno de los siguientes tipos:
+
+```text
+SEDAN
+SUV
+PICKUP
+COUPE
+HATCHBACK
+MOTORCYCLE
 ```
 
-## Compile and run the project
+---
+
+## Requisitos
+
+Antes de comenzar, necesitás tener instalado:
+
+* Node.js
+* npm
+* MySQL
+
+Podés verificar las versiones con:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+node --version
+npm --version
+mysql --version
 ```
 
-## Run tests
+---
+
+## Instalación
+
+Clonar el repositorio:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone <repository-url>
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Ingresar al proyecto:
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+cd rest-api-example
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Instalar las dependencias:
 
-## Resources
+```bash
+npm install
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+---
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## Configuración de MySQL
 
-## Support
+Crear una base de datos:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```sql
+CREATE DATABASE vehicles_api;
+```
 
-## Stay in touch
+Configurar las credenciales de conexión en el proyecto.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Por ejemplo:
 
-## License
+```text
+DB_HOST=localhost
+DB_PORT=3306
+DB_USERNAME=root
+DB_PASSWORD=
+DB_DATABASE=vehicles_api
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+> Las variables exactas dependen de la configuración utilizada en `TypeOrmModule`.
+
+---
+
+## Ejecutar el proyecto
+
+Modo desarrollo:
+
+```bash
+npm run start:dev
+```
+
+La API estará disponible en:
+
+```text
+http://localhost:3000
+```
+
+Como la aplicación utiliza el prefijo global `api`, los endpoints están disponibles debajo de:
+
+```text
+http://localhost:3000/api
+```
+
+---
+
+# Swagger
+
+La API cuenta con documentación interactiva mediante Swagger/OpenAPI.
+
+Una vez iniciada la aplicación, acceder a:
+
+```text
+http://localhost:3000/docs
+```
+
+Desde Swagger es posible:
+
+* Consultar los endpoints.
+* Ver los parámetros.
+* Ver los DTOs.
+* Ver los tipos de respuesta.
+* Consultar los códigos de error.
+* Ejecutar las peticiones directamente desde el navegador.
+
+---
+
+# Endpoints
+
+## Crear un vehículo
+
+```http
+POST /api/vehicles
+```
+
+### Request
+
+```json
+{
+  "licensePlate": "AB123CD",
+  "brand": "Toyota",
+  "model": "Corolla",
+  "year": 2024,
+  "color": "White",
+  "type": "SEDAN"
+}
+```
+
+### Response
+
+```json
+{
+  "id": 1,
+  "licensePlate": "AB123CD",
+  "brand": "Toyota",
+  "model": "Corolla",
+  "year": 2024,
+  "color": "White",
+  "type": "SEDAN",
+  "active": true
+}
+```
+
+---
+
+## Obtener todos los vehículos
+
+```http
+GET /api/vehicles
+```
+
+### Response
+
+```json
+[
+  {
+    "id": 1,
+    "licensePlate": "AB123CD",
+    "brand": "Toyota",
+    "model": "Corolla",
+    "year": 2024,
+    "color": "White",
+    "type": "SEDAN",
+    "active": true
+  }
+]
+```
+
+---
+
+## Obtener un vehículo
+
+```http
+GET /api/vehicles/:id
+```
+
+Ejemplo:
+
+```http
+GET /api/vehicles/1
+```
+
+### Vehículo inexistente
+
+Si el vehículo no existe:
+
+```http
+404 Not Found
+```
+
+Response:
+
+```json
+{
+  "statusCode": 404,
+  "message": "Vehicle with ID 999 not found",
+  "error": "Not Found"
+}
+```
+
+---
+
+## Buscar vehículos
+
+```http
+GET /api/vehicles/search?search=toyota
+```
+
+La búsqueda se realiza sobre:
+
+* License plate
+* Brand
+* Model
+* Color
+
+Ejemplo:
+
+```http
+GET /api/vehicles/search?search=toy
+```
+
+Puede encontrar vehículos cuya marca sea:
+
+```text
+Toyota
+```
+
+También permite búsquedas parciales:
+
+```http
+GET /api/vehicles/search?search=cor
+```
+
+para encontrar, por ejemplo:
+
+```text
+Corolla
+```
+
+La búsqueda solamente devuelve vehículos activos.
+
+---
+
+## Actualizar un vehículo
+
+```http
+PATCH /api/vehicles/:id
+```
+
+Ejemplo:
+
+```http
+PATCH /api/vehicles/1
+```
+
+### Request
+
+No es necesario enviar todos los campos:
+
+```json
+{
+  "color": "Red"
+}
+```
+
+También se pueden modificar varios campos:
+
+```json
+{
+  "model": "Corolla Hybrid",
+  "year": 2025,
+  "color": "Blue"
+}
+```
+
+### Response
+
+```json
+{
+  "id": 1,
+  "licensePlate": "AB123CD",
+  "brand": "Toyota",
+  "model": "Corolla Hybrid",
+  "year": 2025,
+  "color": "Blue",
+  "type": "SEDAN",
+  "active": true
+}
+```
+
+---
+
+## Desactivar un vehículo
+
+```http
+DELETE /api/vehicles/:id
+```
+
+Ejemplo:
+
+```http
+DELETE /api/vehicles/1
+```
+
+La API utiliza **eliminación lógica (soft delete)**.
+
+El registro no se elimina físicamente de MySQL.
+
+En cambio:
+
+```text
+active = true
+```
+
+pasa a:
+
+```text
+active = false
+```
+
+### Response
+
+```json
+{
+  "id": 1,
+  "licensePlate": "AB123CD",
+  "brand": "Toyota",
+  "model": "Corolla",
+  "year": 2024,
+  "color": "White",
+  "type": "SEDAN",
+  "active": false
+}
+```
+
+---
+
+# Estructura del proyecto
+
+```text
+src/
+├── app.module.ts
+├── main.ts
+│
+└── vehicles/
+    ├── dto/
+    │   ├── create-vehicle.dto.ts
+    │   └── update-vehicle.dto.ts
+    │
+    ├── entities/
+    │   └── vehicle.entity.ts
+    │
+    ├── enums/
+    │   └── vehicle-type.enum.ts
+    │
+    ├── vehicles.controller.ts
+    ├── vehicles.module.ts
+    └── vehicles.service.ts
+```
+
+---
+
+# Arquitectura
+
+El proyecto sigue una estructura modular de NestJS:
+
+```text
+HTTP Request
+     │
+     ▼
+Controller
+     │
+     ▼
+Service
+     │
+     ▼
+Repository
+     │
+     ▼
+TypeORM
+     │
+     ▼
+MySQL
+```
+
+### Controller
+
+Se encarga de:
+
+* Recibir las peticiones HTTP.
+* Obtener parámetros.
+* Recibir los DTOs.
+* Definir las rutas.
+* Documentar los endpoints mediante Swagger.
+
+### Service
+
+Contiene la lógica de negocio relacionada con los vehículos.
+
+### DTO
+
+Define la estructura de los datos recibidos por la API.
+
+### Entity
+
+Representa la tabla `vehicles` de MySQL.
+
+### Repository
+
+Permite interactuar con la base de datos mediante TypeORM.
+
+---
+
+# Vehicle
+
+La entidad contiene:
+
+| Campo          | Tipo    | Descripción         |
+| -------------- | ------- | ------------------- |
+| `id`           | number  | Identificador       |
+| `licensePlate` | string  | Patente             |
+| `brand`        | string  | Marca               |
+| `model`        | string  | Modelo              |
+| `year`         | number  | Año                 |
+| `color`        | string  | Color               |
+| `type`         | enum    | Tipo de vehículo    |
+| `active`       | boolean | Estado del vehículo |
+
+---
+
+# Borrado lógico
+
+El endpoint:
+
+```http
+DELETE /api/vehicles/:id
+```
+
+no elimina físicamente el registro.
+
+En lugar de:
+
+```sql
+DELETE FROM vehicles WHERE id = 1;
+```
+
+se realiza conceptualmente:
+
+```sql
+UPDATE vehicles
+SET active = false
+WHERE id = 1;
+```
+
+Esto permite conservar la información del vehículo en la base de datos.
+
+---
+
+# Manejo de errores
+
+La API utiliza las excepciones HTTP proporcionadas por NestJS.
+
+### ID inválido
+
+```http
+GET /api/vehicles/abc
+```
+
+Response:
+
+```http
+400 Bad Request
+```
+
+### Vehículo inexistente
+
+```http
+GET /api/vehicles/999
+```
+
+Response:
+
+```http
+404 Not Found
+```
+
+---
+
+## Desarrollo
+
+Iniciar la aplicación en modo desarrollo:
+
+```bash
+npm run start:dev
+```
